@@ -48,7 +48,7 @@ class UpdateImageRequest extends FormRequest
             'title.required' => 'El título es requerido.',
             'title.max' => 'El título excede el límite permitido de carácteres.',
             'description.string' => 'La descripción debe ser de tipo texto.',
-            'description.required' => 'La descripción es requerido.',
+            'description.required' => 'La descripción es requerida.',
             'description.max' => 'La descrición excede el límite permitido de carácteres.',
             'image.required' => 'La imágen es requerida.',
             'image.mimetypes' => 'El archivo debe de ser de formato imágen (jpeg, png o jpg)'

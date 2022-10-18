@@ -7,7 +7,6 @@ use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateImageRequest;
 use App\Http\Resources\ImageResource;
 use App\Models\Image;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -22,9 +21,7 @@ class ImageApiController extends Controller
      */
     public function index()
     {
-        $data = Image::all();
-        return response()->json($data, 200);
-        //return ImageResource::collection(Image::all());
+        return ImageResource::collection(Image::all())->toJson();
     }
 
     /**
@@ -37,10 +34,10 @@ class ImageApiController extends Controller
     {
         try {
             //Nombre random para almacenar en el server
+            $data = $request->validated();
             $imageRequest = $request->file('image');
             $randomName = Str::random(40) . "." . $imageRequest->getClientOriginalExtension();
-            $path = public_path('uploads') . "/" . $randomName;
-            $data = $request->validated();
+            $path = env('APP_URL') . "/uploads/" . $randomName;
             $image = Image::create([
                 'title' => $data['title'],
                 'description' => $data['description'],
@@ -125,7 +122,7 @@ class ImageApiController extends Controller
             return response(null, Response::HTTP_NOT_FOUND);
         }
         //Eliminar imagen
-        unlink($image->path);
+        unlink(public_path() . "/uploads/$image->name");
         $image->delete();
         return response(null, Response::HTTP_NO_CONTENT);
     }

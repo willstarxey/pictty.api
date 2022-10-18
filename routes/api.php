@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'Api\v1', 'middleware' => ['api', 'cors'],], function () {
+Route::group(['namespace' => 'Api\v1', 'middleware' => ['api'],], function () {
     Route::resource('images', 'ImageApiController')->except(['create', 'edit']);
 });
 

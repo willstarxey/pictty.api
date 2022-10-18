@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources;
 
-use TiMacDonald\JsonApi\JsonApiResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class ImageResource extends JsonApiResource
+class ImageResource extends JsonResource
 {
-    public function toArray($request): array
+    public function toArray($request)
     {
         return [
             'id' => $this->id,
